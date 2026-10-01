@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LaptopStore | Premium Laptops</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--card:#141414;--card2:#1c1c1c;--accent:#00e5cc;--accent2:#7c5cff;--text:#ffffff;--muted:#9ca3af;--border:#232323}
+*{font-family:'Inter',sans-serif}
+h1,h2,h3,.brand{font-family:'Space Grotesk',sans-serif}
+body{background:var(--bg);color:var(--text);overflow-x:hidden}
+.navbar{background:rgba(10,10,10,0.8)!important;backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.brand{font-weight:700;font-size:24px;letter-spacing:-0.5px}
+.brand span{color:var(--accent)}
+.search-box{background:var(--card2);border:1px solid var(--border);border-radius:12px;color:white;padding:10px 16px;width:280px}
+.search-box::placeholder{color:var(--muted)}
+.search-box:focus{outline:none;border-color:var(--accent)}
+.cart-btn{background:var(--accent);border:none;border-radius:12px;padding:10px 18px;font-weight:600;color:#000;position:relative}
+.hero{padding:80px 0 40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(0,229,204,0.15),transparent 70%);top:-100px;left:-100px;filter:blur(40px)}
+.hero h1{font-size:64px;font-weight:700;line-height:0.95;letter-spacing:-2px}
+.hero h1 .line2{background:linear-gradient(90deg,#00e5cc,#7c5cff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--muted);font-size:18px;max-width:480px;margin-top:16px}
+.cta{background:var(--accent);color:#000;border:none;border-radius:100px;padding:14px 28px;font-weight:700;font-size:16px;margin-top:24px;transition:0.3s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,229,204,0.3)}
+.filter-pill{border:1px solid var(--border);background:transparent;color:var(--muted);border-radius:100px;padding:8px 18px;margin:4px;font-size:14px;transition:0.2s}
+.filter-pill.active,.filter-pill:hover{background:white;color:black;border-color:white}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:0.4s;height:100%}
+.product-card:hover{transform:translateY(-8px);border-color:#2a2a2a;box-shadow:0 20px 40px rgba(0,0,0,0.5)}
+.product-img{background:linear-gradient(145deg,#1e1e1e,#151515);height:200px;display:flex;align-items:center;justify-content:center;padding:20px;position:relative}
+.product-img img{max-height:160px;object-fit:contain;transition:0.4s}
+.product-card:hover .product-img img{transform:scale(1.08)}
+.badge-new{position:absolute;top:12px;left:12px;background:var(--accent);color:#000;font-size:10px;font-weight:700;padding:4px 8px;border-radius:100px;letter-spacing:1px}
+.price{font-family:'Space Grotesk';font-weight:700;font-size:20px}
+.old-price{color:var(--muted);text-decoration:line-through;font-size:14px;margin-left:8px}
+.specs{font-size:12px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.specs span{background:var(--card2);border:1px solid var(--border);padding:4px 8px;border-radius:100px}
+.add-btn{width:100%;background:white;color:black;border:none;border-radius:12px;padding:10px;font-weight:600;margin-top:12px;transition:0.2s}
+.add-btn:hover{background:var(--accent)}
+.cart-count{position:absolute;top:-6px;right:-6px;background:#ff2e63;color:white;border-radius:100px;width:20px;height:20px;font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:700}
+footer{border-top:1px solid var(--border);padding:40px 0;margin-top:80px;color:var(--muted);font-size:14px}
+.offcanvas{background:#101010;color:white;border-left:1px solid var(--border)}
+.cart-item{background:var(--card2);border-radius:12px;padding:12px;margin-bottom:12px;border:1px solid var(--border)}
+@media(max-width:768px){.hero h1{font-size:42px}.search-box{width:150px}}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-dark sticky-top px-3 py-3">
+<div class="container-fluid">
+<div class="brand">Laptop<span>Store</span></div>
+<div class="d-flex align-items-center gap-3">
+<input id="searchInput" class="search-box" placeholder="Search laptop, e.g. MacBook...">
+<button class="cart-btn" data-bs-toggle="offcanvas" data-bs-target="#cart">Cart <span id="cartCount" class="cart-count">0</span></button>
+</div>
+</div>
+</nav>
+<section class="hero">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-lg-6">
+<h1>Best Laptops <br><span class="line2">at Best Price.</span></h1>
+<p>Curated premium laptops from Apple, Dell, HP, Lenovo. Built for creators, coders and gamers.</p>
+<button class="cta" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now →</button>
+</div>
+<div class="col-lg-6 d-none d-lg-block text-center">
+<img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=700&auto=format&fit=crop&q=60" style="width:90%;border-radius:24px;opacity:0.9;transform:rotate(-2deg)">
+</div>
+</div>
+</div>
+</section>
+<div class="container text-center my-4">
+<button class="filter-pill active" onclick="filterBrand('All',this)">All</button>
+<button class="filter-pill" onclick="filterBrand('HP',this)">HP</button>
+<button class="filter-pill" onclick="filterBrand('Dell',this)">Dell</button>
+<button class="filter-pill" onclick="filterBrand('Apple',this)">Apple</button>
+<button class="filter-pill" onclick="filterBrand('Lenovo',this)">Lenovo</button>
+<button class="filter-pill" onclick="filterBrand('ASUS',this)">ASUS</button>
+</div>
+<div class="container pb-5" id="products">
+<div class="row g-4" id="productGrid"></div>
+</div>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cart">
+<div class="offcanvas-header">
+<h5 class="offcanvas-title">Your Cart</h5>
+<button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+</div>
+<div class="offcanvas-body d-flex flex-column">
+<div id="cartItems" class="flex-grow-1"></div>
+<div class="border-top pt-3">
+<div class="d-flex justify-content-between mb-3"><span>Total</span><strong id="cartTotal" class="price">₹0</strong></div>
+<button class="add-btn" style="background:var(--accent)" onclick="checkout()">Checkout</button>
+</div>
+</div>
+</div>
+<footer class="text-center">
+<div class="container">
+<p><strong style="color:white">Nausheen Shaikh</strong> — Responsive laptop e-commerce website using HTML, CSS, Bootstrap5, React.js and JavaScript</p>
+</div>
+</footer>
+<script>
+const products=[
+{id:1,brand:'Apple',name:'MacBook Air M2',price:114900,old:129900,specs:['M2 Chip','8GB RAM','256GB SSD'],img:'https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500',new:true},
+{id:2,brand:'Dell',name:'Dell XPS 13 Plus',price:94990,old:109990,specs:['i7 13th Gen','16GB RAM','512GB SSD'],img:'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500',new:true},
+{id:3,brand:'HP',name:'HP Spectre x360',price:87990,old:99990,specs:['i7 13th Gen','16GB','OLED Touch'],img:'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=500'},
+{id:4,brand:'Lenovo',name:'Lenovo ThinkPad X1',price:112000,old:125000,specs:['i7 12th Gen','32GB','Business'],img:'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500'},
