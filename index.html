@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LaptopStore | Bootstrap</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+.hero{background:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url('https://images.unsplash.com/photo-1496181133206-80ce9b88a853');background-size:cover;padding:120px 0}
+.card:hover{transform:translateY(-5px);transition:0.3s;box-shadow:0 10px 20px rgba(0,0,0,0.2)}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand fw-bold text-info">LaptopStore</a>
+<div class="d-flex gap-2">
+<input id="search" class="form-control" placeholder="Search laptop..." onkeyup="searchLaptop()">
+<button class="btn btn-info position-relative" onclick="showCart()">Cart <span id="cartCount" class="badge bg-danger">0</span></button>
+</div>
+</div>
+</nav>
+
+<section class="hero text-center text-white">
+<div class="container">
+<h1 class="display-4 fw-bold">Best Laptops at Best Price</h1>
+<p class="lead">Bootstrap + JavaScript Project</p>
+<button class="btn btn-info btn-lg mt-3" onclick="document.getElementById('products').scrollIntoView()">Shop Now</button>
+</div>
+</section>
+
+<div class="container my-4 text-center">
+<button class="btn btn-outline-dark m-1" onclick="filterLaptops('all')">All</button>
+<button class="btn btn-outline-primary m-1" onclick="filterLaptops('HP')">HP</button>
+<button class="btn btn-outline-primary m-1" onclick="filterLaptops('Dell')">Dell</button>
+<button class="btn btn-outline-primary m-1" onclick="filterLaptops('Apple')">Apple</button>
+<button class="btn btn-outline-primary m-1" onclick="filterLaptops('Lenovo')">Lenovo</button>
+</div>
+
+<div class="container">
+<div id="products" class="row g-4"></div>
+</div>
+
+<footer class="bg-dark text-white text-center p-3 mt-5">
+© 2026 LaptopStore | Made by Nausheen Shaikh | Bootstrap & JS Project
+</footer>
+
+<script>
+let laptops=[
+{id:1,brand:'HP',name:'HP Pavilion 15',spec:'i5, 8GB RAM, 512GB SSD',price:55999,img:'https://images.unsplash.com/photo-1588872657576-7efd1f1555ed'},
+{id:2,brand:'Dell',name:'Dell Inspiron 14',spec:'i7, 16GB RAM, 1TB SSD',price:72999,img:'https://images.unsplash.com/photo-1602080858428-eb2b8f50e2c8'},
+{id:3,brand:'Apple',name:'MacBook Air M1',spec:'M1, 8GB RAM, 256GB SSD',price:89999,img:'https://images.unsplash.com/photo-1611186871348-b1ce696e52c9'},
+{id:4,brand:'Lenovo',name:'Lenovo IdeaPad',spec:'Ryzen 5, 8GB RAM, 512GB SSD',price:48999,img:'https://images.unsplash.com/photo-1583223667854-e0e05b1ad2ad'},
+{id:5,brand:'HP',name:'HP Victus Gaming',spec:'i5, 16GB RAM, RTX 3050',price:65999,img:'https://images.unsplash.com/photo-1593642632823-8f785ba67e45'},
+{id:6,brand:'Apple',name:'MacBook Pro 14',spec:'M2, 16GB RAM, 512GB SSD',price:149999,img:'https://images.unsplash.com/photo-1517336714731-489689fd1ca8'}
+];
+let cart=0;
+function display(data){
+let row=document.getElementById('products');
+row.innerHTML='';
+data.forEach(l=>{
+row.innerHTML+=`
+<div class="col-md-4">
+<div class="card h-100">
+<img src="${l.img}" class="card-img-top" style="height:200px;object-fit:cover">
+<div class="card-body text-center">
+<h5>${l.name}</h5>
+<p class="text-muted">${l.spec}</p>
+<h5 class="text-success">₹${l.price}</h5>
+<button class="btn btn-dark w-100" onclick="addToCart()">Add to Cart</button>
+</div>
+</div>
+</div>`;
+});
+}
+function addToCart(){cart++;document.getElementById('cartCount').innerText=cart;alert('Added to Cart! Total: '+cart);}
+function showCart(){alert('You have '+cart+' items in cart');}
+function filterLaptops(brand){
+if(brand==='all') display(laptops);
+else display(laptops.filter(l=>l.brand===brand));
+}
+function searchLaptop(){
+let val=document.getElementById('search').value.toLowerCase();
+display(laptops.filter(l=>l.name.toLowerCase().includes(val)));
+}
+display(laptops);
+</script>
+</body>
+</html>
